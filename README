@@ -1,0 +1,4 @@
+IMPORTANT:
+
+In order to use the Drive API, you must generate your client ID, AND in your project setting 
+in Google API console, enable "Drive API" (!!!!), not just Drive SDK.

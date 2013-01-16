@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        style="@style/TitleBar" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/icon_desc"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceMediumInverse" />
+
+        <View style="@style/TitleBarSpring" />
+
+        <ProgressBar
+            android:id="@+id/title_refresh_progress"
+            style="@style/TitleBarProgressIndicator"
+            android:visibility="gone" />
+
+        <ImageView
+            style="@style/TitleBarSeparator"
+            android:contentDescription="@string/title_separator_desc" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/hello_world" />
+
+    <TextView
+        android:id="@+id/textView_quota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_hello"
+        android:layout_centerHorizontal="true"
+        android:text="Quota info here" />
+
+    <Button
+        android:id="@+id/button_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Link" />
+
+    <Spinner
+        android:id="@+id/spinner_account_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/checkBox_show_drive" />
+
+    <CheckBox
+        android:id="@+id/checkBox_show_drive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1"
+        android:enabled="false"
+        android:text="Show drive storage" />
+
+</RelativeLayout>
