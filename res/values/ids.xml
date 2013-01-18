@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="gdrive_section">false</item>
+    <item type="id" name="gdrive_account">false</item>
+</resources>

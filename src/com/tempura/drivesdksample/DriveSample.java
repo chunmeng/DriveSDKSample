@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -19,12 +20,17 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,9 +80,9 @@ public class DriveSample extends Activity {
   private CheckBox mCbShowDrive;
   
   int numAsyncTasks;
-public String mUsername;
-public Long mTotalQuota;
-public Long mUsedQuota;
+  public String mUsername;
+  public Long mTotalQuota;
+  public Long mUsedQuota;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -86,8 +92,7 @@ public Long mUsedQuota;
     
     textViewHello = (TextView)findViewById(R.id.textView_hello);
     textViewQuota = (TextView)findViewById(R.id.textView_quota);
-    mBtnLinkDrive = (Button)findViewById(R.id.button_auth);
-    mCbShowDrive = (CheckBox)findViewById(R.id.checkBox_show_drive);
+    mBtnLinkDrive = (Button)findViewById(R.id.button_auth);    
     
     // Set listener
     mBtnLinkDrive.setOnClickListener(new OnClickListener() {
@@ -118,7 +123,54 @@ public Long mUsedQuota;
          android.R.layout.simple_spinner_item, getAccountNames());
     accountAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     accountSpinner.setAdapter(accountAdapter);
-    accountSpinner.setSelection(0);     
+    accountSpinner.setSelection(0); 
+    
+		// add layout dynamically
+    String[] accounts = getAccountNames();
+    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+    LinearLayout mainlayout = (LinearLayout)findViewById(R.id.linearLayout_gdriveBlock);
+    View section = getLayoutInflater().inflate(R.layout.section, null);
+    section.setId(R.id.gdrive_section);
+    section.setTag("GDrive_Section");      
+    mainlayout.addView(section); 
+    
+    for (String name : accounts) {
+        View account = getLayoutInflater().inflate(R.layout.account_item, null);
+        account.setId(R.id.gdrive_account); // this doesn't work in relativeLayout
+        account.setTag("GDrive_account_" + name);         
+        ((CheckBox)account.findViewById(R.id.checkbox_show_account)).setText("Show storage for: " + name);
+        mainlayout.addView(account);    	
+    }    
+    
+    /*    RelativeLayout mainlayout = (RelativeLayout)findViewById(R.id.relativeLayoutMain);
+    //TableLayout table = (TableLayout)findViewById(R.id.tablelayout_section);
+    //inflater.inflate(R.layout.section, table);    
+    View section = getLayoutInflater().inflate(R.layout.section, null);    
+    
+    RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT);
+    p.addRule(RelativeLayout.BELOW, R.id.spinner_account_name);
+   // p.addRule(RelativeLayout.ALIGN_BOTTOM, RelativeLayout.TRUE);
+    section.setId(R.id.gdrive_section);
+    section.setTag("GDrive_Section");      
+    mainlayout.addView(section, p);  
+    
+    int belowId = section.getId();
+    for (String name : accounts) {
+        RelativeLayout.LayoutParams accountLP = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);  
+        accountLP.addRule(RelativeLayout.BELOW, belowId);
+        View account = getLayoutInflater().inflate(R.layout.account_item, null);
+        account.setLayoutParams(accountLP);
+        account.setId(R.id.gdrive_account); // this doesn't work in relativeLayout
+        account.setTag("GDrive_account_" + name);         
+        ((CheckBox)account.findViewById(R.id.checkbox_show_account)).setText("Show storage for: " + name);
+        mainlayout.addView(account, accountLP);    	
+        belowId = account.getId();
+    }  */  
+    
+    
   }  
   
   @Override

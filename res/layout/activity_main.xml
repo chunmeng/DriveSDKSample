@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity" 
+    android:id="@+id/relativeLayoutMain">
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -51,28 +52,27 @@
         android:layout_centerHorizontal="true"
         android:text="Quota info here" />
 
+    <Spinner
+        android:id="@+id/spinner_account_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/linearLayout1" />
+    
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner_account_name"
+        android:id="@+id/linearLayout_gdriveBlock"
+        android:orientation="vertical">
+        <!-- This is a root for the gdriveBlock to be added in code 
+             based on number of account -->
+    </LinearLayout>
+
     <Button
         android:id="@+id/button_auth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Link" />
-
-    <Spinner
-        android:id="@+id/spinner_account_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/checkBox_show_drive" />
-
-    <CheckBox
-        android:id="@+id/checkBox_show_drive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/linearLayout1"
-        android:enabled="false"
-        android:text="Show drive storage" />
-
+        android:text="Link" />    
 </RelativeLayout>
